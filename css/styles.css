@@ -574,11 +574,21 @@ main,
   color: #FFFFFF;
   display: grid;
   place-items: center;
-  opacity: 0.85;
+  opacity: 0;
+  pointer-events: none;
   transition: background-color 0.2s, transform 0.2s var(--md-motion-spring), opacity 0.2s;
 }
 
-.carousel-arrow:hover {
+.device-screen:hover .carousel-arrow,
+.device-screen:focus-within .carousel-arrow,
+.device-screen.is-interacted .carousel-arrow {
+  opacity: 0.85;
+  pointer-events: auto;
+}
+
+.device-screen:hover .carousel-arrow:hover,
+.device-screen:focus-within .carousel-arrow:hover,
+.device-screen.is-interacted .carousel-arrow:hover {
   background: var(--nhac-brown);
   opacity: 1;
 }

@@ -172,10 +172,23 @@
 
     if (printsCarousel) {
       let touchStartX = 0;
+      let interactTimer = null;
+
+      function revealControls() {
+        printsCarousel.classList.add('is-interacted');
+        clearTimeout(interactTimer);
+        interactTimer = setTimeout(() => {
+          printsCarousel.classList.remove('is-interacted');
+        }, 3000);
+      }
+
+      printsCarousel.addEventListener('pointerdown', revealControls);
+
       printsCarousel.addEventListener(
         'touchstart',
         (event) => {
           touchStartX = event.changedTouches[0].clientX;
+          revealControls();
         },
         { passive: true }
       );
