@@ -7,7 +7,7 @@
   <title>Download — Nhac Delivery</title>
   <meta
     name="description"
-    content="Baixe o aplicativo Nhac para Android (APK), acesse o Painel Web do Lojista ou explore o código-fonte no GitHub."
+    content="Baixe o Nhac Delivery e o Nhac para Entregadores para Android 12+, ou acesse o Painel Web do Nhac Lojista."
   />
   <link rel="icon" type="image/png" href="assets/nhac-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -83,85 +83,186 @@
 
   <main>
     <section class="section page-intro">
-      <div class="container">
+      <div class="container download-container">
         <div class="section-header">
-          <span class="section-eyebrow">Android &amp; Web</span>
-          <h1 class="section-title">Baixar o Nhac</h1>
+          <span class="section-eyebrow">Plataforma Nhac</span>
+          <h1 class="section-title">Downloads &amp; Acesso</h1>
           <p class="section-subtitle">
-            Instale a versão mais recente do aplicativo Android diretamente pelas compilações oficiais no GitHub ou acesse o painel web.
+            Escolha o aplicativo ideal para o seu perfil e toque para expandir as informações da versão.
           </p>
         </div>
 
-        <div class="download-hero-card reveal">
-          <div class="download-card-head">
-            <div class="card-icon card-icon--red">
-              <span class="material-symbols-rounded" aria-hidden="true">android</span>
-            </div>
-            <div>
-              <span class="eco-pill-badge" id="releaseTagBadge">Pre-Release oficial</span>
-              <h2>Nhac Delivery para Android</h2>
+        <!-- PixelOS-Inspired Grouped Accordion List -->
+        <div class="m3-accordion-group" id="downloadAccordion">
+          <!-- 1. Nhac Delivery (App Cliente) -->
+          <div class="acc-item is-open" data-release-repo="NhacDelivery/Nhac">
+            <button
+              type="button"
+              class="acc-trigger"
+              aria-expanded="true"
+              aria-controls="acc-panel-nhac"
+            >
+              <span class="acc-title">Nhac Delivery</span>
+              <span class="material-symbols-rounded acc-chevron" aria-hidden="true">expand_more</span>
+            </button>
+
+            <div class="acc-panel" id="acc-panel-nhac">
+              <div class="acc-body">
+                <div class="build-meta-list">
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Compatibilidade</span>
+                    <span class="build-meta-value">Android 12+ (API 31+)</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Arquivo</span>
+                    <span class="build-meta-value build-meta-filename" data-field="filename">app-release.apk</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Tamanho</span>
+                    <span class="build-meta-value" data-field="size">80.1 MB</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">SHA256</span>
+                    <button
+                      type="button"
+                      class="hash-copy-box"
+                      data-copy-hash="e60a27f000bc3aac5892daf93f2eb63af66933c227aa08e2a26bf9a4ffdcb3ce"
+                      aria-label="Copiar hash SHA256 do Nhac Delivery"
+                    >
+                      <span data-field="sha256">e60a27f000bc3aac5892daf93f2eb63af66933c227aa08e2a26bf9a4ffdcb3ce</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="acc-actions">
+                  <a
+                    href="https://github.com/NhacDelivery/Nhac/releases/download/pre-437-544bad4d558002b2d61fa0b444d8f534594c66ab/app-release.apk"
+                    class="m3-btn m3-btn--primary acc-cta ripple-target"
+                    data-field="download-btn"
+                  >
+                    <span class="material-symbols-rounded" aria-hidden="true">download</span>
+                    Baixar APK
+                  </a>
+                  <a
+                    href="https://github.com/NhacDelivery/Nhac/releases"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="acc-sub-link"
+                  >
+                    Ver todas as releases
+                    <span class="material-symbols-rounded" aria-hidden="true">open_in_new</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <p class="download-desc" id="releaseMetaText">
-            Pacote APK compilado via GitHub Actions a partir da branch principal do repositório NhacDelivery/Nhac.
-          </p>
+          <!-- 2. Nhac para Entregadores (Nhac-Motoboy) -->
+          <div class="acc-item" data-release-repo="NhacDelivery/Nhac-Motoboy">
+            <button
+              type="button"
+              class="acc-trigger"
+              aria-expanded="false"
+              aria-controls="acc-panel-motoboy"
+            >
+              <span class="acc-title">Nhac para Entregadores</span>
+              <span class="material-symbols-rounded acc-chevron" aria-hidden="true">expand_more</span>
+            </button>
 
-          <div class="download-actions-row">
-            <a
-              href="https://github.com/NhacDelivery/Nhac/releases/download/pre-437-544bad4d558002b2d61fa0b444d8f534594c66ab/app-release.apk"
-              class="m3-btn m3-btn--primary m3-btn--lg ripple-target"
-              id="apkDownloadBtn"
-            >
-              <span class="material-symbols-rounded" aria-hidden="true">download</span>
-              Baixar APK (Android)
-            </a>
-            <a
-              href="https://github.com/NhacDelivery/Nhac/releases"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="m3-btn m3-btn--tonal m3-btn--lg ripple-target"
-            >
-              <span class="material-symbols-rounded" aria-hidden="true">history</span>
-              Todas as versões
-            </a>
+            <div class="acc-panel" id="acc-panel-motoboy" hidden>
+              <div class="acc-body">
+                <div class="build-meta-list">
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Compatibilidade</span>
+                    <span class="build-meta-value">Android 12+ (API 31+)</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Arquivo</span>
+                    <span class="build-meta-value build-meta-filename" data-field="filename">nhac-motoboy-v0.1.0-build.67.apk</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Tamanho</span>
+                    <span class="build-meta-value" data-field="size">60.2 MB</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">SHA256</span>
+                    <button
+                      type="button"
+                      class="hash-copy-box"
+                      data-copy-hash="6b783e86431df671ba2a2b2533288e13f461b3222f6ea0116704397c31ae13d0"
+                      aria-label="Copiar hash SHA256 do Nhac para Entregadores"
+                    >
+                      <span data-field="sha256">6b783e86431df671ba2a2b2533288e13f461b3222f6ea0116704397c31ae13d0</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="acc-actions">
+                  <a
+                    href="https://github.com/NhacDelivery/Nhac-Motoboy/releases/download/v0.1.0-build.67/nhac-motoboy-v0.1.0-build.67.apk"
+                    class="m3-btn m3-btn--primary acc-cta ripple-target"
+                    data-field="download-btn"
+                  >
+                    <span class="material-symbols-rounded" aria-hidden="true">download</span>
+                    Baixar APK
+                  </a>
+                  <a
+                    href="https://github.com/NhacDelivery/Nhac-Motoboy/releases"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="acc-sub-link"
+                  >
+                    Ver releases do Nhac-Motoboy
+                    <span class="material-symbols-rounded" aria-hidden="true">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="bento-grid download-options-grid">
-          <article class="bento-card bento-card--beige reveal">
-            <div class="card-icon card-icon--brown">
-              <span class="material-symbols-rounded" aria-hidden="true">storefront</span>
-            </div>
-            <h3>Para Lojistas</h3>
-            <p>Gerencie cardápio, pedidos e chat diretamente pelo navegador no Painel do Lojista.</p>
-            <a
-              href="https://nhac-lojista-web.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="m3-btn m3-btn--brown ripple-target"
+          <!-- 3. Nhac Lojista (Web) -->
+          <div class="acc-item">
+            <button
+              type="button"
+              class="acc-trigger"
+              aria-expanded="false"
+              aria-controls="acc-panel-lojista"
             >
-              Abrir Painel Web
-              <span class="material-symbols-rounded" aria-hidden="true">arrow_outward</span>
-            </a>
-          </article>
+              <span class="acc-title">Nhac Lojista</span>
+              <span class="material-symbols-rounded acc-chevron" aria-hidden="true">expand_more</span>
+            </button>
 
-          <article class="bento-card bento-card--white reveal">
-            <div class="card-icon card-icon--cream">
-              <span class="material-symbols-rounded" aria-hidden="true">terminal</span>
+            <div class="acc-panel" id="acc-panel-lojista" hidden>
+              <div class="acc-body">
+                <div class="build-meta-list">
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Plataforma</span>
+                    <span class="build-meta-value">Web (Navegador Desktop e Mobile)</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Recursos</span>
+                    <span class="build-meta-value">Gestão de cardápio, pedidos e chat com clientes</span>
+                  </div>
+                  <div class="build-meta-row">
+                    <span class="build-meta-label">Endereço</span>
+                    <span class="build-meta-value">nhac-lojista-web.vercel.app</span>
+                  </div>
+                </div>
+
+                <div class="acc-actions">
+                  <a
+                    href="https://nhac-lojista-web.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="m3-btn m3-btn--brown acc-cta ripple-target"
+                  >
+                    <span class="material-symbols-rounded" aria-hidden="true">open_in_new</span>
+                    Visitar o site
+                  </a>
+                </div>
+              </div>
             </div>
-            <h3>Compilar do código-fonte</h3>
-            <p>Projeto open source em Flutter 3.2+ sob licença MIT. Clone o repositório e rode com seu arquivo <code>.env</code>.</p>
-            <a
-              href="https://github.com/NhacDelivery/Nhac"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="m3-btn m3-btn--tonal ripple-target"
-            >
-              Ver no GitHub
-              <span class="material-symbols-rounded" aria-hidden="true">arrow_outward</span>
-            </a>
-          </article>
+          </div>
         </div>
       </div>
     </section>

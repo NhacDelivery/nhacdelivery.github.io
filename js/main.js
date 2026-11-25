@@ -184,37 +184,74 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. Latest APK Release Lookup (Download Page)
+     5. Download Accordion & Live GitHub Releases (Download Page)
      ------------------------------------------------------------------------ */
-  const apkDownloadBtn = document.getElementById('apkDownloadBtn');
-  const releaseTagBadge = document.getElementById('releaseTagBadge');
-  const releaseMetaText = document.getElementById('releaseMetaText');
+  const accordionItems = document.querySelectorAll('#downloadAccordion .acc-item');
+  accordionItems.forEach((item) => {
+    const trigger = item.querySelector('.acc-trigger');
+    const panel = item.querySelector('.acc-panel');
+    if (!trigger || !panel) return;
 
-  if (apkDownloadBtn) {
-    fetch('https://api.github.com/repos/NhacDelivery/Nhac/releases?per_page=1')
+    trigger.addEventListener('click', () => {
+      const willOpen = !item.classList.contains('is-open');
+      item.classList.toggle('is-open', willOpen);
+      trigger.setAttribute('aria-expanded', String(willOpen));
+      panel.hidden = !willOpen;
+    });
+  });
+
+  const hashCopyBtns = document.querySelectorAll('[data-copy-hash]');
+  hashCopyBtns.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const hash = btn.dataset.copyHash;
+      if (!hash) return;
+      try {
+        await navigator.clipboard.writeText(hash);
+        showSnackbar('SHA256 copiado!');
+      } catch {
+        showSnackbar('SHA256 selecionado.');
+      }
+    });
+  });
+
+  const releaseItems = document.querySelectorAll('[data-release-repo]');
+  releaseItems.forEach((item) => {
+    const repo = item.dataset.releaseRepo;
+    if (!repo) return;
+
+    fetch(`https://api.github.com/repos/${repo}/releases?per_page=1`)
       .then((res) => (res.ok ? res.json() : null))
       .then((releases) => {
         if (!Array.isArray(releases) || releases.length === 0) return;
         const latest = releases[0];
         const apkAsset = (latest.assets || []).find((a) => a.name && a.name.endsWith('.apk'));
-        if (apkAsset && apkAsset.browser_download_url) {
-          apkDownloadBtn.href = apkAsset.browser_download_url;
+        if (!apkAsset) return;
+
+        const filenameEl = item.querySelector('[data-field="filename"]');
+        const sizeEl = item.querySelector('[data-field="size"]');
+        const shaEl = item.querySelector('[data-field="sha256"]');
+        const hashBtn = item.querySelector('[data-copy-hash]');
+        const dlBtn = item.querySelector('[data-field="download-btn"]');
+
+        if (filenameEl && apkAsset.name) {
+          filenameEl.textContent = apkAsset.name;
         }
-        if (releaseTagBadge && latest.name) {
-          releaseTagBadge.textContent = latest.name;
+        if (sizeEl && apkAsset.size) {
+          sizeEl.textContent = `${(apkAsset.size / (1024 * 1024)).toFixed(1)} MB`;
         }
-        if (releaseMetaText && apkAsset && apkAsset.size) {
-          const mb = (apkAsset.size / (1024 * 1024)).toFixed(1);
-          const date = latest.published_at
-            ? new Date(latest.published_at).toLocaleDateString('pt-BR')
-            : '';
-          releaseMetaText.textContent = `APK oficial (${mb} MB)${date ? ` • Publicado em ${date}` : ''} via GitHub Releases.`;
+        if (apkAsset.digest) {
+          const cleanHash = apkAsset.digest.replace(/^sha256:/, '');
+          if (shaEl) shaEl.textContent = cleanHash;
+          if (hashBtn) hashBtn.dataset.copyHash = cleanHash;
+        }
+        if (dlBtn && apkAsset.browser_download_url) {
+          dlBtn.href = apkAsset.browser_download_url;
         }
       })
       .catch(() => {
-        // Keeps the fallback static APK URL defined in download.html
+        // Keeps the static fallback metadata rendered in HTML
       });
-  }
+  });
 
   /* ------------------------------------------------------------------------
      6. Ecosystem Segmented Tabs (Ecossistema Page)
