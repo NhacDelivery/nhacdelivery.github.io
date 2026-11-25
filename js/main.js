@@ -359,7 +359,16 @@
   const teamCards = document.querySelectorAll('[data-github-user]');
   const teamLoading = document.getElementById('teamLoading');
   const teamLottieEl = document.getElementById('teamLottie');
-  const teamGrid = document.getElementById('teamGrid');
+
+  function waitForImage(img) {
+    if (!img) return Promise.resolve();
+    if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+    return new Promise((resolve) => {
+      const done = () => resolve();
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true });
+    });
+  }
 
   if (teamCards.length > 0) {
     let teamLottieAnim = null;
@@ -375,43 +384,46 @@
 
     const profilePromises = Array.from(teamCards).map((card) => {
       const username = card.dataset.githubUser;
-      if (!username) return Promise.resolve();
+      const img = card.querySelector('.team-avatar img');
+      if (!username) return waitForImage(img);
 
       return fetch(`https://api.github.com/users/${encodeURIComponent(username)}`)
         .then((res) => (res.ok ? res.json() : null))
         .then((profile) => {
-          if (!profile || !profile.login) return;
-          const img = card.querySelector('.team-avatar img');
-          const nameEl = card.querySelector('.gh-name');
-          const handleEl = card.querySelector('.gh-handle');
+          if (profile && profile.login) {
+            const nameEl = card.querySelector('.gh-name');
+            const handleEl = card.querySelector('.gh-handle');
 
-          const displayName = (profile.name && profile.name.trim()) || profile.login;
-          if (img && profile.avatar_url) {
-            img.src = profile.avatar_url;
-            img.alt = `Foto de perfil de ${displayName}`;
+            const displayName = (profile.name && profile.name.trim()) || profile.login;
+            if (img && profile.avatar_url) {
+              img.src = profile.avatar_url;
+              img.alt = `Foto de perfil de ${displayName}`;
+            }
+            if (nameEl) {
+              nameEl.textContent = displayName;
+            }
+            if (handleEl) {
+              handleEl.textContent = `@${profile.login} • GitHub`;
+            }
           }
-          if (nameEl) {
-            nameEl.textContent = displayName;
-          }
-          if (handleEl) {
-            handleEl.textContent = `@${profile.login} • GitHub`;
-          }
+          return waitForImage(img);
         })
-        .catch(() => {
-          // Keeps the static fallback avatar and name rendered in HTML
-        });
+        .catch(() => waitForImage(img));
     });
 
-    Promise.allSettled(profilePromises).then(() => {
-      if (teamLottieAnim) {
-        teamLottieAnim.destroy();
-      }
+    const safetyTimeout = new Promise((resolve) => setTimeout(resolve, 6000));
+
+    Promise.race([Promise.allSettled(profilePromises), safetyTimeout]).then(() => {
       if (teamLoading) {
-        teamLoading.hidden = true;
-      }
-      if (teamGrid) {
-        teamGrid.hidden = false;
-        teamGrid.classList.add('is-visible');
+        teamLoading.classList.add('is-done');
+        setTimeout(() => {
+          teamLoading.hidden = true;
+          if (teamLottieAnim) {
+            teamLottieAnim.destroy();
+          }
+        }, 260);
+      } else if (teamLottieAnim) {
+        teamLottieAnim.destroy();
       }
     });
   }
