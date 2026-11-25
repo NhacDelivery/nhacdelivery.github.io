@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFF8F7" />
+  <title>Nhac Delivery</title>
+  <meta
+    name="description"
+    content="Nhac, o Delivery. Simples, prático e feito para pedir seus pratos favoritos sem complicação."
+  />
+  <meta property="og:title" content="Nhac — O Delivery" />
+  <meta
+    property="og:description"
+    content="Delivery simples e prático em Flutter com pagamento via Pix, cartão e rastreio em tempo real."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/nhac-logo.png" />
+
+  <link rel="icon" type="image/png" href="assets/nhac-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-home">
+  <!-- Ambient Material You / Monet Shapes (PixelOS-inspired) -->
+  <div class="ambient-layer" aria-hidden="true">
+    <svg class="monet-blob monet-blob--tl spin-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill="var(--nhac-beige)"
+        d="M100,8 C115,8 124,23 138,28 C152,33 169,27 179,38 C189,49 183,66 188,80 C193,94 200,108 193,121 C186,134 170,138 164,151 C158,164 162,181 150,189 C138,197 122,188 108,191 C94,194 81,200 68,192 C55,184 53,167 41,159 C29,151 12,152 6,139 C0,126 11,111 10,97 C9,83 -2,70 5,56 C12,42 29,43 40,33 C51,23 53,7 67,4 C81,1 85,8 100,8 Z"
+      />
+    </svg>
+    <svg class="monet-blob monet-blob--tr spin-reverse" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill="var(--nhac-cream-strong)"
+        d="M112,12 C145,15 178,34 188,68 C198,102 183,144 155,169 C127,194 84,199 52,181 C20,163 2,122 10,85 C18,48 53,16 86,12 C95,11 103,11 112,12 Z"
+      />
+    </svg>
+    <svg class="monet-blob monet-blob--bl spin-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill="var(--nhac-red-soft)"
+        d="M100,14 C126,14 147,33 163,52 C179,71 190,91 186,115 C182,139 162,167 136,180 C110,193 77,191 52,175 C27,159 11,129 14,100 C17,71 39,43 65,27 C77,19 88,14 100,14 Z"
+      />
+    </svg>
+    <svg class="monet-blob monet-blob--br spin-reverse" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill="var(--nhac-beige-soft)"
+        d="M100,6 C118,6 130,22 146,29 C162,36 182,34 190,49 C198,64 185,82 187,99 C189,116 200,135 190,149 C180,163 159,161 144,171 C129,181 120,196 102,196 C84,196 74,180 58,172 C42,164 21,166 12,151 C3,136 16,118 14,100 C12,82 2,64 12,50 C22,36 42,39 57,29 C72,19 82,6 100,6 Z"
+      />
+    </svg>
+  </div>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-link" aria-label="Nhac - Página inicial">
+        <img
+          src="assets/nhac-logo.png"
+          alt="Logo Nhac"
+          class="brand-logo"
+          width="1244"
+          height="460"
+        />
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="index.html" class="nav-link active">Início</a>
+        <a href="documentacao.html" class="nav-link">Documentação</a>
+        <a href="equipe.html" class="nav-link">Equipe</a>
+        <a href="download.html" class="nav-cta-chip ripple-target">
+          <span class="material-symbols-rounded" aria-hidden="true">download</span>
+          Download
+        </a>
+      </nav>
+
+      <button
+        type="button"
+        class="hamburger-btn"
+        id="hamburgerBtn"
+        aria-label="Abrir menu de navegação"
+        aria-controls="mobileDrawer"
+        aria-expanded="false"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Full-Screen M3 Navigation Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true" inert>
+    <div class="mobile-drawer-blobs" aria-hidden="true"></div>
+    <nav class="mobile-drawer-nav" aria-label="Menu móvel">
+      <a href="index.html" class="mobile-nav-link active">
+        <span class="material-symbols-rounded" aria-hidden="true">home</span>
+        Início
+      </a>
+      <a href="download.html" class="mobile-nav-link">
+        <span class="material-symbols-rounded" aria-hidden="true">download</span>
+        Download do App
+      </a>
+      <a href="documentacao.html" class="mobile-nav-link">
+        <span class="material-symbols-rounded" aria-hidden="true">description</span>
+        Documentação
+      </a>
+      <a href="equipe.html" class="mobile-nav-link">
+        <span class="material-symbols-rounded" aria-hidden="true">group</span>
+        Equipe
+      </a>
+    </nav>
+
+    <div class="mobile-drawer-actions">
+      <a
+        href="https://github.com/NhacDelivery/Nhac"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="m3-btn m3-btn--github ripple-target"
+      >
+        <svg class="btn-brand-icon" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+        </svg>
+        Acesse no Github
+      </a>
+      <a
+        href="https://www.figma.com/design/VEpDtQ9u5xsytcx7K7M0sU/Projeto-Nhac?node-id=0-1&t=RadYcYtwipyF9VR9-1"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="m3-btn m3-btn--figma ripple-target"
+      >
+        <svg class="btn-brand-icon" viewBox="0 0 38 57" aria-hidden="true">
+          <path fill="#1ABCFE" d="M19 28.5A9.5 9.5 0 1 1 28.5 19 9.5 9.5 0 0 1 19 28.5Z"/>
+          <path fill="#0ACF83" d="M9.5 47.5A9.5 9.5 0 0 1 19 38v9.5a9.5 9.5 0 0 1-9.5 0Z"/>
+          <path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19Z"/>
+          <path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5Z"/>
+          <path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5Z"/>
+        </svg>
+        Manual da Marca
+      </a>
+    </div>
+  </div>
+
+  <!-- Minimal PixelOS-Style Hero -->
+  <main class="home-main">
+    <section class="hero-home">
+      <div class="container hero-home-grid">
+        <!-- Catchy Phrase + Download CTA -->
+        <div class="hero-home-copy">
+          <h1 class="hero-home-title">Nhac, o Delivery.</h1>
+          <p class="hero-home-subtitle">
+            Simples, prático e direto ao ponto — peça seus pratos favoritos, pague sem complicação e acompanhe em tempo real.
+          </p>
+          <a href="download.html" class="m3-btn m3-btn--primary m3-btn--lg hero-download-btn ripple-target">
+            <span class="material-symbols-rounded" aria-hidden="true">download</span>
+            Baixar o Nhac
+          </a>
+        </div>
+
+        <!-- Pixel Phone Mockup with Real App Screenshots -->
+        <div class="hero-home-phone">
+          <div class="device-shell device-pixel" aria-label="Prints do aplicativo Nhac">
+            <span class="pixel-btn pixel-btn--power" aria-hidden="true"></span>
+            <span class="pixel-btn pixel-btn--volume" aria-hidden="true"></span>
+            <div class="device-screen" id="printsCarousel">
+              <span class="pixel-punchhole" aria-hidden="true"></span>
+              <div class="prints-track" id="printsTrack">
+                <figure class="print-slide">
+                  <img src="assets/prints/1.jpg" alt="Tela inicial do aplicativo Nhac com localização, categorias e destaques" loading="eager" decoding="async" />
+                </figure>
+                <figure class="print-slide">
+                  <img src="assets/prints/2.jpg" alt="Tela de detalhes do produto no aplicativo Nhac" loading="eager" decoding="async" />
+                </figure>
+                <figure class="print-slide">
+                  <img src="assets/prints/3.jpg" alt="Comprovante e finalização de pedido no aplicativo Nhac" loading="eager" decoding="async" />
+                </figure>
+                <figure class="print-slide">
+                  <img src="assets/prints/4.png" alt="Rastreamento de pedido no mapa em tempo real no Nhac" loading="eager" decoding="async" />
+                </figure>
+                <figure class="print-slide">
+                  <img src="assets/prints/5.jpg" alt="Chat em tempo real com o estabelecimento no Nhac" loading="eager" decoding="async" />
+                </figure>
+                <figure class="print-slide">
+                  <img src="assets/prints/6.jpg" alt="Feed social da comunidade do aplicativo Nhac" loading="eager" decoding="async" />
+                </figure>
+                <figure class="print-slide">
+                  <img src="assets/prints/7.jpg" alt="Publicação e avaliação de pedido no Feed do Nhac" loading="eager" decoding="async" />
+                </figure>
+              </div>
+
+              <button type="button" class="carousel-arrow carousel-arrow--prev" id="prevPrint" aria-label="Print anterior">
+                <span class="material-symbols-rounded" aria-hidden="true">chevron_left</span>
+              </button>
+              <button type="button" class="carousel-arrow carousel-arrow--next" id="nextPrint" aria-label="Próximo print">
+                <span class="material-symbols-rounded" aria-hidden="true">chevron_right</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="carousel-meta">
+            <div class="carousel-dots" id="printDots" role="tablist" aria-label="Selecionar tela do aplicativo">
+              <button type="button" class="c-dot active" data-slide="0" aria-label="Tela Início" aria-selected="true"></button>
+              <button type="button" class="c-dot" data-slide="1" aria-label="Tela Produto" aria-selected="false"></button>
+              <button type="button" class="c-dot" data-slide="2" aria-label="Tela Pedido" aria-selected="false"></button>
+              <button type="button" class="c-dot" data-slide="3" aria-label="Tela Rastreio" aria-selected="false"></button>
+              <button type="button" class="c-dot" data-slide="4" aria-label="Tela Chat" aria-selected="false"></button>
+              <button type="button" class="c-dot" data-slide="5" aria-label="Tela Feed" aria-selected="false"></button>
+              <button type="button" class="c-dot" data-slide="6" aria-label="Tela Avaliação" aria-selected="false"></button>
+            </div>
+            <span class="carousel-caption" id="printCaption">Início • Descoberta</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="home-mini-footer">
+    <div class="container home-mini-footer-inner">
+      <span>© 2026 NhacDelivery • Licença MIT</span>
+      <a
+        href="https://github.com/NhacDelivery"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-github-link footer-github-link--light"
+        aria-label="GitHub da organização NhacDelivery"
+      >
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <div class="m3-snackbar" id="snackbar" role="status" aria-live="polite"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
