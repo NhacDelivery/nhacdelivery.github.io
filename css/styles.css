@@ -1140,6 +1140,22 @@ main,
 .team-info span { display: block; font-size: 0.85rem; color: var(--nhac-gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .team-arrow { color: var(--nhac-red); flex-shrink: 0; }
 
+.team-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.team-loading[hidden] {
+  display: none;
+}
+
+.team-lottie {
+  width: min(320px, 80vw);
+  aspect-ratio: 16 / 9;
+}
+
 /* ==========================================================================
    Inline Fullscreen PDF Documentation Viewer
    ========================================================================== */

@@ -2,6 +2,19 @@
   'use strict';
 
   /* ------------------------------------------------------------------------
+     0. Clean URL Normalization (GitHub Pages / HTTP servers)
+     ------------------------------------------------------------------------ */
+  if (window.location.protocol !== 'file:' && window.history && window.history.replaceState) {
+    const path = window.location.pathname;
+    if (path.endsWith('/index.html')) {
+      const cleanPath = path.slice(0, -10) || '/';
+      window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+    } else if (path.endsWith('.html')) {
+      window.history.replaceState(null, '', path.slice(0, -5) + window.location.search + window.location.hash);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
      1. Mobile Navigation Drawer
      ------------------------------------------------------------------------ */
   const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -200,20 +213,6 @@
     });
   });
 
-  const hashCopyBtns = document.querySelectorAll('[data-copy-hash]');
-  hashCopyBtns.forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const hash = btn.dataset.copyHash;
-      if (!hash) return;
-      try {
-        await navigator.clipboard.writeText(hash);
-        showSnackbar('SHA256 copiado!');
-      } catch {
-        showSnackbar('SHA256 selecionado.');
-      }
-    });
-  });
-
   const releaseItems = document.querySelectorAll('[data-release-repo]');
   releaseItems.forEach((item) => {
     const repo = item.dataset.releaseRepo;
@@ -227,22 +226,11 @@
         const apkAsset = (latest.assets || []).find((a) => a.name && a.name.endsWith('.apk'));
         if (!apkAsset) return;
 
-        const filenameEl = item.querySelector('[data-field="filename"]');
         const sizeEl = item.querySelector('[data-field="size"]');
-        const shaEl = item.querySelector('[data-field="sha256"]');
-        const hashBtn = item.querySelector('[data-copy-hash]');
         const dlBtn = item.querySelector('[data-field="download-btn"]');
 
-        if (filenameEl && apkAsset.name) {
-          filenameEl.textContent = apkAsset.name;
-        }
         if (sizeEl && apkAsset.size) {
           sizeEl.textContent = `${(apkAsset.size / (1024 * 1024)).toFixed(1)} MB`;
-        }
-        if (apkAsset.digest) {
-          const cleanHash = apkAsset.digest.replace(/^sha256:/, '');
-          if (shaEl) shaEl.textContent = cleanHash;
-          if (hashBtn) hashBtn.dataset.copyHash = cleanHash;
         }
         if (dlBtn && apkAsset.browser_download_url) {
           dlBtn.href = apkAsset.browser_download_url;
@@ -369,12 +357,27 @@
      8. GitHub Team Live Profile Sync (Equipe Page)
      ------------------------------------------------------------------------ */
   const teamCards = document.querySelectorAll('[data-github-user]');
-  if (teamCards.length > 0) {
-    teamCards.forEach((card) => {
-      const username = card.dataset.githubUser;
-      if (!username) return;
+  const teamLoading = document.getElementById('teamLoading');
+  const teamLottieEl = document.getElementById('teamLottie');
+  const teamGrid = document.getElementById('teamGrid');
 
-      fetch(`https://api.github.com/users/${encodeURIComponent(username)}`)
+  if (teamCards.length > 0) {
+    let teamLottieAnim = null;
+    if (teamLottieEl && window.lottie) {
+      teamLottieAnim = window.lottie.loadAnimation({
+        container: teamLottieEl,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'assets/loading_nhac.json'
+      });
+    }
+
+    const profilePromises = Array.from(teamCards).map((card) => {
+      const username = card.dataset.githubUser;
+      if (!username) return Promise.resolve();
+
+      return fetch(`https://api.github.com/users/${encodeURIComponent(username)}`)
         .then((res) => (res.ok ? res.json() : null))
         .then((profile) => {
           if (!profile || !profile.login) return;
@@ -397,6 +400,19 @@
         .catch(() => {
           // Keeps the static fallback avatar and name rendered in HTML
         });
+    });
+
+    Promise.allSettled(profilePromises).then(() => {
+      if (teamLottieAnim) {
+        teamLottieAnim.destroy();
+      }
+      if (teamLoading) {
+        teamLoading.hidden = true;
+      }
+      if (teamGrid) {
+        teamGrid.hidden = false;
+        teamGrid.classList.add('is-visible');
+      }
     });
   }
 

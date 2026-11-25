@@ -34,14 +34,14 @@
 
   <header class="top-nav" id="top">
     <div class="container nav-inner">
-      <a href="index.html" class="brand-link" aria-label="Nhac - Página inicial">
+      <a href="/" class="brand-link" aria-label="Nhac - Página inicial">
         <img src="assets/nhac-logo.png" alt="Logo Nhac" class="brand-logo" width="1244" height="460" />
       </a>
       <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="index.html" class="nav-link">Início</a>
-        <a href="documentacao.html" class="nav-link">Documentação</a>
-        <a href="equipe.html" class="nav-link active">Equipe</a>
-        <a href="download.html" class="nav-cta-chip ripple-target">
+        <a href="/" class="nav-link">Início</a>
+        <a href="/equipe" class="nav-link active">Equipe</a>
+        <a href="/documentacao" class="nav-link">Documentação</a>
+        <a href="/download" class="nav-cta-chip ripple-target">
           <span class="material-symbols-rounded" aria-hidden="true">download</span>
           Download
         </a>
@@ -56,10 +56,10 @@
   <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true" inert>
     <div class="mobile-drawer-blobs" aria-hidden="true"></div>
     <nav class="mobile-drawer-nav" aria-label="Menu móvel">
-      <a href="index.html" class="mobile-nav-link"><span class="material-symbols-rounded" aria-hidden="true">home</span>Início</a>
-      <a href="download.html" class="mobile-nav-link"><span class="material-symbols-rounded" aria-hidden="true">download</span>Download do App</a>
-      <a href="documentacao.html" class="mobile-nav-link"><span class="material-symbols-rounded" aria-hidden="true">description</span>Documentação</a>
-      <a href="equipe.html" class="mobile-nav-link active"><span class="material-symbols-rounded" aria-hidden="true">group</span>Equipe</a>
+      <a href="/" class="mobile-nav-link"><span class="material-symbols-rounded" aria-hidden="true">home</span>Início</a>
+      <a href="/download" class="mobile-nav-link"><span class="material-symbols-rounded" aria-hidden="true">download</span>Download do App</a>
+      <a href="/equipe" class="mobile-nav-link active"><span class="material-symbols-rounded" aria-hidden="true">group</span>Equipe</a>
+      <a href="/documentacao" class="mobile-nav-link"><span class="material-symbols-rounded" aria-hidden="true">description</span>Documentação</a>
     </nav>
     <div class="mobile-drawer-actions">
       <a href="https://github.com/NhacDelivery/Nhac" target="_blank" rel="noopener noreferrer" class="m3-btn m3-btn--github ripple-target">
@@ -85,14 +85,17 @@
     <section class="section page-intro">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Feito com Dedicação</span>
           <h1 class="section-title">Quem constrói o Nhac</h1>
           <p class="section-subtitle">
             Desenvolvido como Trabalho de Conclusão de Curso (TCC) e mantido em código aberto no GitHub sob licença MIT.
           </p>
         </div>
 
-        <div class="team-grid reveal">
+        <div class="team-loading" id="teamLoading" role="status" aria-live="polite" aria-label="Carregando equipe">
+          <div class="team-lottie" id="teamLottie" aria-hidden="true"></div>
+        </div>
+
+        <div class="team-grid reveal" id="teamGrid" hidden>
           <a href="https://github.com/feentzs" target="_blank" rel="noopener noreferrer" class="team-card ripple-target" data-github-user="feentzs">
             <div class="team-avatar">
               <img src="https://github.com/feentzs.png?size=200" alt="Foto de perfil de feentzs" loading="lazy" />
@@ -101,7 +104,7 @@
               <strong class="gh-name">ftz*!</strong>
               <span class="gh-handle">@feentzs • GitHub</span>
             </div>
-            <span class="material-symbols-rounded team-arrow" aria-hidden="true">arrow_forward</span>
+            <span class="material-symbols-rounded team-arrow" aria-hidden="true">chevron_right</span>
           </a>
 
           <a href="https://github.com/Matheuskii" target="_blank" rel="noopener noreferrer" class="team-card ripple-target" data-github-user="Matheuskii">
@@ -112,7 +115,7 @@
               <strong class="gh-name">Matheus Alves</strong>
               <span class="gh-handle">@Matheuskii • GitHub</span>
             </div>
-            <span class="material-symbols-rounded team-arrow" aria-hidden="true">arrow_forward</span>
+            <span class="material-symbols-rounded team-arrow" aria-hidden="true">chevron_right</span>
           </a>
 
           <a href="https://github.com/h3llsyn" target="_blank" rel="noopener noreferrer" class="team-card ripple-target" data-github-user="h3llsyn">
@@ -123,7 +126,7 @@
               <strong class="gh-name">Laví</strong>
               <span class="gh-handle">@h3llsyn • GitHub</span>
             </div>
-            <span class="material-symbols-rounded team-arrow" aria-hidden="true">arrow_forward</span>
+            <span class="material-symbols-rounded team-arrow" aria-hidden="true">chevron_right</span>
           </a>
 
           <a href="https://github.com/eduardoramos08" target="_blank" rel="noopener noreferrer" class="team-card ripple-target" data-github-user="eduardoramos08">
@@ -134,7 +137,7 @@
               <strong class="gh-name">Eduardo Ramos</strong>
               <span class="gh-handle">@eduardoramos08 • GitHub</span>
             </div>
-            <span class="material-symbols-rounded team-arrow" aria-hidden="true">arrow_forward</span>
+            <span class="material-symbols-rounded team-arrow" aria-hidden="true">chevron_right</span>
           </a>
 
           <a href="https://github.com/nikollas-dh" target="_blank" rel="noopener noreferrer" class="team-card ripple-target" data-github-user="nikollas-dh">
@@ -145,66 +148,15 @@
               <strong class="gh-name">Nikollas Dheyvis</strong>
               <span class="gh-handle">@nikollas-dh • GitHub</span>
             </div>
-            <span class="material-symbols-rounded team-arrow" aria-hidden="true">arrow_forward</span>
-          </a>
-        </div>
-
-        <div class="figma-banner reveal">
-          <div class="figma-banner-copy">
-            <span class="material-symbols-rounded" aria-hidden="true">folder_open</span>
-            <div>
-              <strong>Organização NhacDelivery</strong>
-              <p>Todos os repositórios do ecossistema — App Cliente, Entregador, Lojista Web e Backend Spring Boot.</p>
-            </div>
-          </div>
-          <a
-            href="https://github.com/NhacDelivery"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="m3-btn m3-btn--primary ripple-target"
-          >
-            Ver no GitHub
-            <span class="material-symbols-rounded" aria-hidden="true">arrow_outward</span>
+            <span class="material-symbols-rounded team-arrow" aria-hidden="true">chevron_right</span>
           </a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo-pill">
-          <img src="assets/nhac-logo.png" alt="Nhac" width="1244" height="460" />
-        </div>
-        <p>Delivery simples e prático. Projeto acadêmico de código aberto sob licença MIT.</p>
-      </div>
-      <div class="footer-links">
-        <a href="index.html">Início</a>
-        <a href="download.html">Download</a>
-        <a href="documentacao.html">Documentação</a>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 NhacDelivery • Licença MIT</span>
-        <div class="footer-actions">
-          <a
-            href="https://github.com/NhacDelivery"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-github-link"
-            aria-label="GitHub da organização NhacDelivery"
-          >
-            <svg viewBox="0 0 16 16" aria-hidden="true">
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
-            </svg>
-          </a>
-          <a href="#top" class="back-to-top"><span class="material-symbols-rounded" aria-hidden="true">arrow_upward</span>Topo</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <div class="m3-snackbar" id="snackbar" role="status" aria-live="polite"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
