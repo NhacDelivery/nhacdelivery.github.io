@@ -222,7 +222,12 @@
       const willOpen = !item.classList.contains('is-open');
       item.classList.toggle('is-open', willOpen);
       trigger.setAttribute('aria-expanded', String(willOpen));
-      panel.hidden = !willOpen;
+      panel.setAttribute('aria-hidden', String(!willOpen));
+      if (willOpen) {
+        panel.removeAttribute('inert');
+      } else {
+        panel.setAttribute('inert', '');
+      }
     });
   });
 

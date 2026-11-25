@@ -737,10 +737,22 @@ main,
 }
 
 .acc-panel {
-  padding: 0 22px 22px;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.34s var(--md-motion-standard);
+}
+
+.acc-item.is-open .acc-panel {
+  grid-template-rows: 1fr;
+}
+
+.acc-panel-inner {
+  overflow: hidden;
+  min-height: 0;
 }
 
 .acc-body {
+  padding: 0 22px 22px;
   display: flex;
   flex-direction: column;
   gap: 18px;
